@@ -80,7 +80,7 @@ extension Firestore {
 
 	public static func update(_ document:DocumentReference,
 							  with object:Encodable) {
-		document.updateData(object.asDict)
+		document.updateData(object.toDictionary())
 	}
 
 	public static func update(in collection: CollectionReference,

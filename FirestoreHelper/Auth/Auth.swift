@@ -11,12 +11,9 @@ import FirebaseInstanceID
 import FirebaseAuth
 import CoreLocation
 
-extension Firestore {
+public let usersRef = "users"
 
-	/// Для регистрации пользователей по username используется аутенфикация по почте.
-	static private func fakeEmail(_ username: String) -> String {
-		return "\(username)@ysoftware.ru"
-	}
+extension Firestore {
 
 	// MARK: - Auth 
 
@@ -32,7 +29,7 @@ extension Firestore {
 				completion(error)
 			}
 			else if let user = result?.user {
-				let userRef = ref(.users).document(user.uid)
+				let userRef = ref(usersRef).document(user.uid)
 				userRef.setData([
 					Constants.User.id:user.uid as Any,
 					Constants.User.phoneNumber:user.phoneNumber as Any
@@ -63,8 +60,11 @@ extension Firestore {
 					   signInIfUserExists:Bool = true,
 					   completion: @escaping Completion.Error) {
 		Auth.auth().createUser(withEmail: email, password: password) { result, error in
-			if error == nil, let firebaseUser = result?.user {
-				let userRef = ref(.users).document(firebaseUser.uid)
+			if error == nil,
+				let firebaseUser = result?.user,
+				result?.additionalUserInfo?.isNewUser == true {
+
+				let userRef = ref(usersRef).document(firebaseUser.uid)
 				userRef.setData([
 					Constants.User.id:firebaseUser.uid as Any,
 					Constants.User.email:firebaseUser.email as Any
@@ -108,7 +108,7 @@ extension Firestore {
 		InstanceID.instanceID().instanceID { result, error in
 			guard let tokenString = result?.token else { return }
 
-			ref(.users).document(userId).collection(Constants.User.tokens)
+			ref(usersRef).document(userId).collection(Constants.User.tokens)
 				.document(tokenString).setData([
 					Constants.User.tokenDate:Date.nowTimestamp,
 					Constants.User.tokenInfo:tokenString
@@ -122,7 +122,7 @@ extension Firestore {
 		InstanceID.instanceID().instanceID { result, error in
 			guard let tokenString = result?.token else { return }
 
-			ref(.users).document(userId).collection(Constants.User.tokens)
+			ref(usersRef).document(userId).collection(Constants.User.tokens)
 				.document(tokenString).delete()
 		}
 	}
@@ -130,7 +130,7 @@ extension Firestore {
 	/// Обновить местоположение пользователя в базе данных.
 	/// - important: Периодически вызывается в AuthController.
 	static func updateLocation(userId:String, _ location: CLLocation) {
-		ref(.users).document(userId).updateData([
+		ref(usersRef).document(userId).updateData([
 			Constants.User.locationDate:Date.nowTimestamp,
 			Constants.User.latitude:location.coordinate.latitude,
 			Constants.User.longitude:location.coordinate.longitude
@@ -140,7 +140,7 @@ extension Firestore {
 	/// Удалить текущий токен пользователя из базы данных.
 	/// - important: Вызывается в AuthController при выходе из системы.
 	public static func updateLastSeen(userId:String) {
-		ref(.users).document(userId).updateData([
+		ref(usersRef).document(userId).updateData([
 			Constants.User.lastSeen:Date.nowTimestamp
 			])
 	}
@@ -148,7 +148,7 @@ extension Firestore {
 	/// Обновить текущую версию приложения, которой пользуется пользователь.
 	/// - important: Автоматически вызывается в AuthController.
 	public static func updateVersionCode(userId:String) {
-		ref(.users).document(userId).updateData([
+		ref(usersRef).document(userId).updateData([
 			Constants.User.appVersion: Bundle.main.object(
 				forInfoDictionaryKey: "CFBundleShortVersionString") as Any
 			])

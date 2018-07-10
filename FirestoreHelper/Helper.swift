@@ -25,14 +25,6 @@ extension Firestore {
 		}
 	}
 
-	public static func getList<T:Codable>(_ collection:Collection,
-										  cursor:DocumentSnapshot?,
-										  limit:UInt,
-										  setup:QuerySetupBlock? = nil,
-										  _ completion: @escaping ([T], DocumentSnapshot?) -> Void) {
-		getList(from: ref(collection), cursor: cursor, limit: limit, setup: setup, completion)
-	}
-
 	// MARK: - Lists
 
 	public static func getList<T:Codable>(from query:Query,
@@ -40,11 +32,6 @@ extension Firestore {
 		query.getDocuments { snapshot, _ in
 			completion(snapshot?.getArray(of: T.self) ?? [])
 		}
-	}
-
-	public static func getList<T:Codable>(_ collection:Collection,
-										  _ completion: @escaping ([T]) -> Void) {
-		getList(from: ref(collection), completion)
 	}
 
 	// MARK: - Objects
@@ -69,30 +56,4 @@ extension Firestore {
 		guard id.count > 0 else { return completion(nil) } // protection from crash
 		get(from: collection.document(id), completion)
 	}
-
-	public static func get<T:Codable>(_ collection:Collection,
-									  with id:String,
-									  _ completion: @escaping (T?) -> Void) {
-		get(from: ref(collection), with:id, completion)
-	}
-
-	// MARK: - Write
-
-	public static func update(_ document:DocumentReference,
-							  with object:Encodable) {
-		document.updateData(object.toDictionary())
-	}
-
-	public static func update(in collection: CollectionReference,
-							  id:String,
-							  with object:Encodable) {
-		update(collection.document(id), with: object)
-	}
-
-	public static func update(_ collection:Collection,
-							  id:String,
-							  with object:Encodable) {
-		update(in: ref(collection), id: id, with: object)
-	}
-
 }

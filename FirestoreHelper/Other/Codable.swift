@@ -66,7 +66,7 @@ public extension DocumentReference {
 	/// ```
 	/// reference.set(object: user)
 	/// ```
-	
+
 	/// - Parameters:
 	/// 	- object: Объект модели.
 	public func set<T:Codable>(object:T, completion:Completion.Error? = nil) {
@@ -74,6 +74,29 @@ public extension DocumentReference {
 			let data = try JSONEncoder().encode(object)
 			let value = try JSONDecoder().decode(JSONAny.self, from: data)
 			setData(value.toDictionary(), completion: { error in
+				completion?(error)
+			})
+		}
+		catch let error {
+			print("firestore reference.set: \(error)")
+		}
+	}
+
+	/// Обновить данные в документ базы данных по данному указателю.
+	///
+	/// Например,
+	///
+	/// ```
+	/// reference.set(object: user)
+	/// ```
+
+	/// - Parameters:
+	/// 	- object: Объект модели.
+	public func update<T:Codable>(with object:T, completion:Completion.Error? = nil) {
+		do {
+			let data = try JSONEncoder().encode(object)
+			let value = try JSONDecoder().decode(JSONAny.self, from: data)
+			updateData(value.toDictionary(), completion: { error in
 				completion?(error)
 			})
 		}

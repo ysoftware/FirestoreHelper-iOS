@@ -1,0 +1,6 @@
+framework module AuthController {
+  umbrella header "AuthController-umbrella.h"
+
+  export *
+  module * { export * }
+}

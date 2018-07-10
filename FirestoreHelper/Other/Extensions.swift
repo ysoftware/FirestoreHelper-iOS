@@ -6,7 +6,7 @@
 //  Copyright © 2018 Ysoftware. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension String {
 
@@ -64,5 +64,24 @@ extension Date {
 
 	static var nowIso8601:String {
 		return Date().iso8601
+	}
+}
+
+extension UIViewController {
+
+	func call(title:String = "Внимание!",
+			  message:String? = nil,
+			  buttonTitle:String = "ОК",
+			  completion: (()->Void)? = nil) {
+		guard message != nil else { return }
+
+		let string = message
+		let alert = UIAlertController(title: title, message: string, preferredStyle: .alert)
+		let action = UIAlertAction(title: buttonTitle, style: .default) { _ in
+			completion?()
+			alert.dismiss(animated: true)
+		}
+		alert.addAction(action)
+		present(alert, animated: true, completion: nil)
 	}
 }

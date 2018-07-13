@@ -8,7 +8,7 @@
 
 import FirebaseFirestore
 
-extension Firestore {
+extension FirestoreHelper {
 
 	// MARK: - Paginated Lists
 

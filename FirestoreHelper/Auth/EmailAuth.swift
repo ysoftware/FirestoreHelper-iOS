@@ -32,7 +32,7 @@ open class EmailAuthVC: UIViewController {
 
 		guard checkPasswordLength(password) else { return call(message: shortPasswordMessage) }
 
-		Firestore.signIn(email: email, password: password) { error in
+		FirestoreHelper.signIn(email: email, password: password) { error in
 			if let error = error {
 				self.call(message: error.localizedDescription)
 			}
@@ -48,7 +48,7 @@ open class EmailAuthVC: UIViewController {
 
 		guard checkPasswordLength(password) else { return call(message: shortPasswordMessage) }
 
-		Firestore.signUp(email: email, password: password, signInIfUserExists:false) { error in
+		FirestoreHelper.signUp(email: email, password: password, signInIfUserExists:false) { error in
 			if let error = error {
 				self.call(message: error.localizedDescription)
 			}
@@ -60,7 +60,7 @@ open class EmailAuthVC: UIViewController {
 
 	@IBAction func resetPassword(_ sender:Any) { // TO-DO: Никогда не проверял как это работает
 		let email = emailField.text!
-		Firestore.resetPassword(email: email) { error in
+		FirestoreHelper.resetPassword(email: email) { error in
 			if let error = error {
 				self.call(message: error.localizedDescription)
 			}

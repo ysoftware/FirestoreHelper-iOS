@@ -8,7 +8,7 @@
 
 import FirebaseFirestore
 
-extension Firestore {
+extension FirestoreHelper {
 
 	/// Метод-зеркало стандартного метода транзакции Firestore.
 	///
@@ -17,7 +17,7 @@ extension Firestore {
 	/// 	- completion: Блок, выполняемый по окончанию с результатом или ошибкой транзакции.
 	public static func transaction(_ updateBlock: @escaping (Transaction, NSErrorPointer)->Any?,
 								   completion: @escaping (Any?, Error?) -> Void) {
-		FirebaseFirestore.Firestore.firestore().runTransaction(updateBlock, completion: completion)
+		Firestore.firestore().runTransaction(updateBlock, completion: completion)
 	}
 
 	/// Начать транзакцию Firestore для изменения одного поля в одном документе.

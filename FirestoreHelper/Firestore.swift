@@ -12,7 +12,7 @@ import FirebaseFirestore
 
 ///	Набор статических методов для работы с базой данных Firebase Firestore.
 /// Добавление методов, необходимых этому приложению рекомендуется путём расширения этого объекта.
-public struct Firestore {
+public struct FirestoreHelper {
 	private init() {}
 
 	public typealias QuerySetupBlock = (Query)->Query
@@ -35,7 +35,7 @@ public struct Firestore {
 	/// 	- children: Список названий дочерних ветвей.
 	/// - returns: Cсылку на ветвь в базе данных Firebase.
     public static func ref(_ collection:String) -> CollectionReference {
-        return FirebaseFirestore.Firestore.firestore().collection(collection)
+        return Firestore.firestore().collection(collection)
     }
 	
 	public static func move(document:DocumentReference,

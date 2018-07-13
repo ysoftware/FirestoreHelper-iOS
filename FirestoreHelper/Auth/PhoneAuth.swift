@@ -107,7 +107,7 @@ open class PhoneAuthVC: UIViewController {
 			.credential(withVerificationID: verificationId,
 						verificationCode: code)
 
-		Firestore.signIn(credentials: credential, completion: { error in
+		FirestoreHelper.signIn(credentials: credential, completion: { error in
 			if let error = error {
 				self.call(message: error.localizedDescription)
 			}

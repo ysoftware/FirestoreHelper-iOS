@@ -13,7 +13,7 @@ import CoreLocation
 
 public let usersRef = "users"
 
-extension Firestore {
+extension FirestoreHelper {
 
 	// MARK: - Auth 
 

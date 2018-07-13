@@ -34,17 +34,17 @@ public class FirestoreAuthService<U:AuthControllerUser>: AuthNetworking<U> where
 
 	override public func updateLastSeen() {
 		guard let userId = getUserId() else { return }
-		Firestore.updateLastSeen(userId: userId)
+		FirestoreHelper.updateLastSeen(userId: userId)
 	}
 
 	override public func updateLocation(_ location: CLLocation) {
 		guard let userId = getUserId() else { return }
-		Firestore.updateLocation(userId: userId, location)
+		FirestoreHelper.updateLocation(userId: userId, location)
 	}
 
 	override public func observeUser(id: String, _ block: @escaping (U?) -> Void) -> UserObserver {
-		let userRef = Firestore.ref(usersRef).document(id)
-		let handle = Firestore.observe(at: userRef) { (user:U?) in
+		let userRef = FirestoreHelper.ref(usersRef).document(id)
+		let handle = FirestoreHelper.observe(at: userRef) { (user:U?) in
 			block(user)
 		}
 		return FirestoreUserObserver(handle)
@@ -52,21 +52,21 @@ public class FirestoreAuthService<U:AuthControllerUser>: AuthNetworking<U> where
 
 	override public func updateToken() {
 		guard let userId = getUserId() else { return }
-		Firestore.updateToken(userId: userId)
+		FirestoreHelper.updateToken(userId: userId)
 	}
 
 	override public func updateVersionCode() {
 		guard let userId = getUserId() else { return }
-		Firestore.updateVersionCode(userId: userId)
+		FirestoreHelper.updateVersionCode(userId: userId)
 	}
 
 	override public func removeToken() {
 		guard let userId = getUserId() else { return }
-		Firestore.removeToken(userId: userId)
+		FirestoreHelper.removeToken(userId: userId)
 	}
 
 	override public func signOut() {
-		Firestore.signOut()
+		FirestoreHelper.signOut()
 	}
 
 	override public func onAuthStateChanged(_ block: @escaping () -> Void) {

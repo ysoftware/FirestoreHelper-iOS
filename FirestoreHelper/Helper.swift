@@ -17,44 +17,70 @@ extension FirestoreHelper {
 					cursor:DocumentSnapshot?,
 					limit:UInt,
 					setup:Request? = nil,
-					_ completion: @escaping ([T], DocumentSnapshot?, Error?) -> Void) {
+					_ completion: @escaping (Result<PaginatedResponse<[T]>>) -> Void) {
 		var query = query.limit(to: Int(limit))
 		if let setup = setup { query = setup.setupRequest(query) }
 		if let cursor = cursor { query = query.start(afterDocument: cursor) }
 		query.getDocuments { snapshot, error in
-			completion(snapshot?.getArray(of: T.self) ?? [], snapshot?.documents.last, error)
+			if let error = error {
+				return completion(.error(error))
+			}
+			guard let items = snapshot?.getArray(of: T.self) else {
+				return completion(.error(FirestoreHelperError.parsingError))
+			}
+			completion(.data(PaginatedResponse(items, snapshot?.documents.last)))
 		}
 	}
 
 	// MARK: - Lists
 
 	public static func getList<T:Codable>(from query:Query,
-										  _ completion: @escaping ([T], Error?) -> Void) {
+										  _ completion: @escaping (Result<[T]>) -> Void) {
 		query.getDocuments { snapshot, error in
-			completion(snapshot?.getArray(of: T.self) ?? [], error)
+			if let error = error {
+				return completion(.error(error))
+			}
+			guard let items = snapshot?.getArray(of: T.self) else {
+				return completion(.error(FirestoreHelperError.parsingError))
+			}
+			completion(.data(items))
 		}
 	}
 
 	// MARK: - Objects
 
 	public static func observe<T:Codable>(at document: DocumentReference,
-										  _ block: @escaping (T?) -> Void) -> ListenerRegistration {
-		return document.addSnapshotListener { snapshot, _ in
-			block(snapshot?.getValue(T.self))
+										  _ block: @escaping (Result<T>) -> Void) -> ListenerRegistration {
+		return document.addSnapshotListener { snapshot, error in
+			if let error = error {
+				return block(.error(error))
+			}
+			guard let item = snapshot?.getValue(T.self) else {
+				return block(.error(FirestoreHelperError.parsingError))
+			}
+			block(.data(item))
 		}
 	}
 
 	public static func get<T:Codable>(from document: DocumentReference,
-									  _ completion: @escaping (T?, Error?) -> Void) {
+									  _ completion: @escaping (Result<T>) -> Void) {
 		document.getDocument { snapshot, error in
-			completion(snapshot?.getValue(T.self), error)
+			if let error = error {
+				return completion(.error(error))
+			}
+			guard let item = snapshot?.getValue(T.self) else {
+				return completion(.error(FirestoreHelperError.parsingError))
+			}
+			completion(.data(item))
 		}
 	}
 
 	public static func get<T:Codable>(from collection:CollectionReference,
 									  with id:String,
-									  _ completion: @escaping (T?, Error?) -> Void) {
-		guard id.count > 0 else { return completion(nil, nil) } // protection from crash
+									  _ completion: @escaping (Result<T>) -> Void) {
+		guard id.count > 0 else { // protection from crash
+			return completion(.error(FirestoreHelperError.invalidRequest))
+		}
 		get(from: collection.document(id), completion)
 	}
 }

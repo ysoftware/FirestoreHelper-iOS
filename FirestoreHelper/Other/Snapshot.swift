@@ -66,7 +66,7 @@ public extension DocumentReference {
 	/// ```
 	/// reference.set(object: user)
 	/// ```
-
+	///
 	/// - Parameters:
 	/// 	- object: Объект модели.
 	public func set<T:Codable>(object:T, completion:Completion.Error? = nil) {

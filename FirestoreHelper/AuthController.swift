@@ -44,8 +44,13 @@ public class FirestoreAuthService<U:AuthControllerUser>: AuthNetworking<U> where
 
 	override public func observeUser(id: String, _ block: @escaping (U?) -> Void) -> UserObserver {
 		let userRef = FirestoreHelper.ref(usersRef).document(id)
-		let handle = FirestoreHelper.observe(at: userRef) { (user:U?) in
-			block(user)
+		let handle = FirestoreHelper.observe(at: userRef) { (result:Result<U>) in
+			switch result {
+			case .data(let user):
+				block(user)
+			case .error(_):
+				block(nil)
+			}
 		}
 		return FirestoreUserObserver(handle)
 	}

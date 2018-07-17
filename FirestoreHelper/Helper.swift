@@ -17,7 +17,7 @@ extension FirestoreHelper {
 					cursor:DocumentSnapshot?,
 					limit:UInt,
 					setup:Request? = nil,
-					_ completion: @escaping (Result<PaginatedResponse<[T]>>) -> Void) {
+					_ completion: @escaping (PaginatedResult<[T]>) -> Void) {
 		var query = query.limit(to: Int(limit))
 		if let setup = setup { query = setup.setupRequest(query) }
 		if let cursor = cursor { query = query.start(afterDocument: cursor) }
@@ -28,7 +28,7 @@ extension FirestoreHelper {
 			guard let items = snapshot?.getArray(of: T.self) else {
 				return completion(.error(FirestoreHelperError.parsingError))
 			}
-			completion(.data(PaginatedResponse(items, snapshot?.documents.last)))
+			completion(.data(items:items, cursor:snapshot?.documents.last))
 		}
 	}
 

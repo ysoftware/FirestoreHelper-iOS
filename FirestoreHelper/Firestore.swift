@@ -15,8 +15,6 @@ import FirebaseFirestore
 public struct FirestoreHelper {
 	private init() {}
 
-	public typealias QuerySetupBlock = (Query)->Query
-
     // MARK: - Methods
 
 	/// Возвращает текущего пользователя Firebase.

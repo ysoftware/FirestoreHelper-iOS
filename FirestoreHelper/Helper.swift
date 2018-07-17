@@ -16,10 +16,10 @@ extension FirestoreHelper {
 		<T:Codable>(from query:Query,
 					cursor:DocumentSnapshot?,
 					limit:UInt,
-					setup:QuerySetupBlock? = nil,
+					setup:Request? = nil,
 					_ completion: @escaping ([T], DocumentSnapshot?, Error?) -> Void) {
 		var query = query.limit(to: Int(limit))
-		if let setup = setup { query = setup(query) }
+		if let setup = setup { query = setup.setupRequest(query) }
 		if let cursor = cursor { query = query.start(afterDocument: cursor) }
 		query.getDocuments { snapshot, error in
 			completion(snapshot?.getArray(of: T.self) ?? [], snapshot?.documents.last, error)

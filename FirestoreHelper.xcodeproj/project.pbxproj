@@ -18,6 +18,9 @@
 		714ABF4320F24DCA0023831F /* Completion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ABF4220F24DCA0023831F /* Completion.swift */; };
 		714ABF4520F24E980023831F /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ABF4420F24E980023831F /* AuthController.swift */; };
 		714ABF4A20F255BB0023831F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714ABF4920F255BB0023831F /* Constants.swift */; };
+		715F6C2D20FCEC6F0045C13D /* Snapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C2C20FCEC6F0045C13D /* Snapshot.swift */; };
+		715F6C4A20FDD16E0045C13D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C4920FDD16E0045C13D /* Request.swift */; };
+		715F6C4C20FDD1E20045C13D /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C4B20FDD1E20045C13D /* Result.swift */; };
 		71B7DC7720F4A85900BFDF94 /* EmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7DC7520F4A85900BFDF94 /* EmailAuth.swift */; };
 		71B7DC7820F4A85900BFDF94 /* PhoneAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7DC7620F4A85900BFDF94 /* PhoneAuth.swift */; };
 		7A5E480611D2C16001A263C1 /* Pods_FirestoreHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B94AF9FA337A81A38647F0ED /* Pods_FirestoreHelper.framework */; };
@@ -38,6 +41,9 @@
 		714ABF4220F24DCA0023831F /* Completion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Completion.swift; sourceTree = "<group>"; };
 		714ABF4420F24E980023831F /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		714ABF4920F255BB0023831F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		715F6C2C20FCEC6F0045C13D /* Snapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Snapshot.swift; sourceTree = "<group>"; };
+		715F6C4920FDD16E0045C13D /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		715F6C4B20FDD1E20045C13D /* Result.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		71B7DC7520F4A85900BFDF94 /* EmailAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuth.swift; sourceTree = "<group>"; };
 		71B7DC7620F4A85900BFDF94 /* PhoneAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneAuth.swift; sourceTree = "<group>"; };
 		913B1C0CDEDA39AEF01144EF /* Pods-FirestoreHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirestoreHelper/Pods-FirestoreHelper.release.xcconfig"; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 				714ABF3220F24C650023831F /* Helper.swift */,
 				714ABF3320F24C660023831F /* Transaction.swift */,
 				714ABF4420F24E980023831F /* AuthController.swift */,
+				715F6C5B20FDD2DA0045C13D /* Parse */,
 				714ABF4820F24EC90023831F /* Other */,
 				714ABF4620F24EAE0023831F /* Support Files */,
 			);
@@ -109,13 +116,31 @@
 		714ABF4820F24EC90023831F /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				715F6C5A20FDD2CC0045C13D /* Types */,
 				714ABF4920F255BB0023831F /* Constants.swift */,
 				714ABF4220F24DCA0023831F /* Completion.swift */,
 				714ABF3D20F24C9D0023831F /* Extensions.swift */,
+				715F6C2C20FCEC6F0045C13D /* Snapshot.swift */,
+			);
+			path = Other;
+			sourceTree = "<group>";
+		};
+		715F6C5A20FDD2CC0045C13D /* Types */ = {
+			isa = PBXGroup;
+			children = (
+				715F6C4920FDD16E0045C13D /* Request.swift */,
+				715F6C4B20FDD1E20045C13D /* Result.swift */,
+			);
+			path = Types;
+			sourceTree = "<group>";
+		};
+		715F6C5B20FDD2DA0045C13D /* Parse */ = {
+			isa = PBXGroup;
+			children = (
 				714ABF3E20F24CA10023831F /* Codable.swift */,
 				714ABF3C20F24C970023831F /* JSONAny.swift */,
 			);
-			path = Other;
+			path = Parse;
 			sourceTree = "<group>";
 		};
 		71B7DC7420F4A82700BFDF94 /* Auth */ = {
@@ -239,13 +264,16 @@
 				714ABF4120F24CA10023831F /* Codable.swift in Sources */,
 				714ABF3620F24C6E0023831F /* Firestore.swift in Sources */,
 				71B7DC7820F4A85900BFDF94 /* PhoneAuth.swift in Sources */,
+				715F6C2D20FCEC6F0045C13D /* Snapshot.swift in Sources */,
 				714ABF3F20F24CA10023831F /* JSONAny.swift in Sources */,
 				71B7DC7720F4A85900BFDF94 /* EmailAuth.swift in Sources */,
+				715F6C4C20FDD1E20045C13D /* Result.swift in Sources */,
 				714ABF4520F24E980023831F /* AuthController.swift in Sources */,
 				714ABF4020F24CA10023831F /* Extensions.swift in Sources */,
 				714ABF4320F24DCA0023831F /* Completion.swift in Sources */,
 				714ABF3A20F24C6E0023831F /* Auth.swift in Sources */,
 				714ABF3820F24C6E0023831F /* Helper.swift in Sources */,
+				715F6C4A20FDD16E0045C13D /* Request.swift in Sources */,
 				714ABF3920F24C6E0023831F /* Transaction.swift in Sources */,
 				714ABF4A20F255BB0023831F /* Constants.swift in Sources */,
 			);

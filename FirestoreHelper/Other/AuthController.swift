@@ -12,6 +12,7 @@ import AuthController
 import FirebaseAuth
 import FirebaseFirestore
 import CoreLocation
+import Result
 
 public class FirestoreUserObserver: UserObserver {
 
@@ -44,11 +45,11 @@ public class FirestoreAuthService<U:AuthControllerUser>: AuthNetworking<U> where
 
 	override public func observeUser(id: String, _ block: @escaping (U?) -> Void) -> UserObserver {
 		let userRef = FirestoreHelper.ref(usersRef).document(id)
-		let handle = FirestoreHelper.observe(at: userRef) { (result:Result<U>) in
+		let handle = FirestoreHelper.observe(at: userRef) { (result:Result<U, FirestoreHelperError>) in
 			switch result {
-			case .data(let user):
+			case .success(let user):
 				block(user)
-			case .error(_):
+			case .failure(_):
 				block(nil)
 			}
 		}

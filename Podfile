@@ -7,5 +7,6 @@ pod 'AuthController', :path => '/Users/ysoftware/Documents/Work/Shared/AuthContr
 pod 'Firebase/Auth'
 pod 'Firebase/Core'
 pod 'Firebase/Firestore'
+pod 'Result'
 
 end

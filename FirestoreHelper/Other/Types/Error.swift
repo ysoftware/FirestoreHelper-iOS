@@ -11,12 +11,16 @@ import Foundation
 public enum FirestoreHelperError: LocalizedError {
 
 	case parsingError
+	
 	case invalidRequest
+
+	case other(Error)
 
 	public var errorDescription: String? {
 		switch self {
 		case .parsingError: return "Parsing error"
 		case .invalidRequest: return "Invalid request"
+		case .other(let error): return error.localizedDescription
 		}
 	}
 }

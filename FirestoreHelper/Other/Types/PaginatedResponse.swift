@@ -8,9 +8,9 @@
 
 import FirebaseFirestore
 
-public enum PaginatedResult<T> {
+public struct PaginatedResponse<T> {
 
-	case data(items:T, cursor:DocumentSnapshot?)
+	let items:T
 
-	case error(Error)
+	let cursor:DocumentSnapshot?
 }

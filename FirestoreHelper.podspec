@@ -134,6 +134,6 @@ Pod::Spec.new do |s|
   s.dependency "Firebase/Auth"
   s.dependency "Firebase/Core"
   s.dependency "Firebase/Firestore"
-  s.dependency "AuthController"
+  s.dependency "Result"
 
 end

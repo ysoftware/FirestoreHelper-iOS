@@ -10,7 +10,7 @@ import FirebaseFirestore
 
 public struct PaginatedResponse<T> {
 
-	let items:T
+	public let items:T
 
-	let cursor:DocumentSnapshot?
+	public let cursor:DocumentSnapshot?
 }

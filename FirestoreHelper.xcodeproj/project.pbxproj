@@ -22,6 +22,9 @@
 		715F6C4A20FDD16E0045C13D /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C4920FDD16E0045C13D /* Request.swift */; };
 		715F6C5D20FDD4340045C13D /* PaginatedResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C5C20FDD4340045C13D /* PaginatedResponse.swift */; };
 		715F6C6120FDD66D0045C13D /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715F6C6020FDD66D0045C13D /* Error.swift */; };
+		717634D72150306900EC1E8B /* Comments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717634D62150306900EC1E8B /* Comments.swift */; };
+		717634D92150333C00EC1E8B /* Likeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717634D82150333C00EC1E8B /* Likeable.swift */; };
+		717634DB2150334600EC1E8B /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717634DA2150334600EC1E8B /* Comment.swift */; };
 		71B7DC7720F4A85900BFDF94 /* EmailAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7DC7520F4A85900BFDF94 /* EmailAuth.swift */; };
 		71B7DC7820F4A85900BFDF94 /* PhoneAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71B7DC7620F4A85900BFDF94 /* PhoneAuth.swift */; };
 		7A5E480611D2C16001A263C1 /* Pods_FirestoreHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B94AF9FA337A81A38647F0ED /* Pods_FirestoreHelper.framework */; };
@@ -46,6 +49,9 @@
 		715F6C4920FDD16E0045C13D /* Request.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		715F6C5C20FDD4340045C13D /* PaginatedResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginatedResponse.swift; sourceTree = "<group>"; };
 		715F6C6020FDD66D0045C13D /* Error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		717634D62150306900EC1E8B /* Comments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comments.swift; sourceTree = "<group>"; };
+		717634D82150333C00EC1E8B /* Likeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Likeable.swift; sourceTree = "<group>"; };
+		717634DA2150334600EC1E8B /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		71B7DC7520F4A85900BFDF94 /* EmailAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmailAuth.swift; sourceTree = "<group>"; };
 		71B7DC7620F4A85900BFDF94 /* PhoneAuth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhoneAuth.swift; sourceTree = "<group>"; };
 		913B1C0CDEDA39AEF01144EF /* Pods-FirestoreHelper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FirestoreHelper.release.xcconfig"; path = "Pods/Target Support Files/Pods-FirestoreHelper/Pods-FirestoreHelper.release.xcconfig"; sourceTree = "<group>"; };
@@ -94,6 +100,7 @@
 		714ABF0920F22CC10023831F /* FirestoreHelper */ = {
 			isa = PBXGroup;
 			children = (
+				717634D52150305A00EC1E8B /* Like and Comment */,
 				71B7DC7420F4A82700BFDF94 /* Auth */,
 				714ABF3020F24C630023831F /* Firestore.swift */,
 				714ABF3220F24C650023831F /* Helper.swift */,
@@ -144,6 +151,16 @@
 				714ABF3C20F24C970023831F /* JSONAny.swift */,
 			);
 			path = Parse;
+			sourceTree = "<group>";
+		};
+		717634D52150305A00EC1E8B /* Like and Comment */ = {
+			isa = PBXGroup;
+			children = (
+				717634DA2150334600EC1E8B /* Comment.swift */,
+				717634D62150306900EC1E8B /* Comments.swift */,
+				717634D82150333C00EC1E8B /* Likeable.swift */,
+			);
+			path = "Like and Comment";
 			sourceTree = "<group>";
 		};
 		71B7DC7420F4A82700BFDF94 /* Auth */ = {
@@ -272,12 +289,15 @@
 				71B7DC7720F4A85900BFDF94 /* EmailAuth.swift in Sources */,
 				714ABF4520F24E980023831F /* AuthController.swift in Sources */,
 				714ABF4020F24CA10023831F /* Extensions.swift in Sources */,
+				717634D92150333C00EC1E8B /* Likeable.swift in Sources */,
+				717634D72150306900EC1E8B /* Comments.swift in Sources */,
 				715F6C6120FDD66D0045C13D /* Error.swift in Sources */,
 				714ABF4320F24DCA0023831F /* Completion.swift in Sources */,
 				714ABF3A20F24C6E0023831F /* Auth.swift in Sources */,
 				714ABF3820F24C6E0023831F /* Helper.swift in Sources */,
 				715F6C5D20FDD4340045C13D /* PaginatedResponse.swift in Sources */,
 				715F6C4A20FDD16E0045C13D /* Request.swift in Sources */,
+				717634DB2150334600EC1E8B /* Comment.swift in Sources */,
 				714ABF3920F24C6E0023831F /* Transaction.swift in Sources */,
 				714ABF4A20F255BB0023831F /* Constants.swift in Sources */,
 			);

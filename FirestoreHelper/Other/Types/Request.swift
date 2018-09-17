@@ -10,5 +10,5 @@ import FirebaseFirestore
 
 public protocol Request {
 
-	public func setupRequest(_ request:Query)->Query
+	func setupRequest(_ request:Query)->Query
 }

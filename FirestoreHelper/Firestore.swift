@@ -13,6 +13,7 @@ import FirebaseFirestore
 ///	Набор статических методов для работы с базой данных Firebase Firestore.
 /// Добавление методов, необходимых этому приложению рекомендуется путём расширения этого объекта.
 public struct FirestoreHelper {
+	
 	private init() {}
 
     // MARK: - Methods

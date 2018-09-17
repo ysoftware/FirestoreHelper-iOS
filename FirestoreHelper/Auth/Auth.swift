@@ -40,7 +40,7 @@ extension FirestoreHelper {
 	}
 
 	/// Запросить письмо для восстановления доступа к аккаунту Firebase.
-	static func resetPassword(email:String, completion: @escaping Completion.Error) {
+	public static func resetPassword(email:String, completion: @escaping Completion.Error) {
 		Auth.auth().sendPasswordReset(withEmail: email) { error in
 			completion(error)
 		}
@@ -55,7 +55,7 @@ extension FirestoreHelper {
 	/// 	- email: Почта.
 	/// 	- password: Пароль (текстом).
 	/// 	- completion: Блок, вызываемый при окончании запроса.
-	static func signUp(email:String,
+	public static func signUp(email:String,
 					   password:String,
 					   signInIfUserExists:Bool = true,
 					   completion: @escaping Completion.Error) {
@@ -91,7 +91,7 @@ extension FirestoreHelper {
 	///	  - email: Почта.
 	///	  - password: Пароль (текстом).
 	///	  - completion: Блок, вызываемый при окончании запроса.
-	static func signIn(email:String, password:String, completion: @escaping Completion.Error) {
+	public static func signIn(email:String, password:String, completion: @escaping Completion.Error) {
 		Auth.auth().signIn(withEmail: email, password: password) { user, error in
 			if let error = error {
 				completion(error)
@@ -129,7 +129,7 @@ extension FirestoreHelper {
 
 	/// Обновить местоположение пользователя в базе данных.
 	/// - important: Периодически вызывается в AuthController.
-	static func updateLocation(userId:String, _ location: CLLocation) {
+	public static func updateLocation(userId:String, _ location: CLLocation) {
 		ref(usersRef).document(userId).updateData([
 			Constants.User.locationDate:Date.nowTimestamp,
 			Constants.User.latitude:location.coordinate.latitude,
